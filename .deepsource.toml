@@ -1,0 +1,17 @@
+version = 1
+
+exclude_patterns = [
+  "vendor/**",
+  "public/**"
+]
+
+[[analyzers]]
+name = "go"
+enabled = true
+
+  [analyzers.meta]
+  import_root = "github.com/akshit-deepsource/fiber"
+
+[[analyzers]]
+name = "secrets"
+enabled = true
