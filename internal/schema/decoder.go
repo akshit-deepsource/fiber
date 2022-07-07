@@ -232,7 +232,7 @@ func (d *Decoder) decode(v reflect.Value, path string, parts []pathPart, values 
 	// Slice of structs. Let's go recursive.
 	if len(parts) > 1 {
 		idx := parts[0].index
-		if v.IsNil() || v.Len() < idx+1 {
+		if v.IsNil() || v.Len() <= idx {
 			value := reflect.MakeSlice(t, idx+1, idx+1)
 			if v.Len() < idx+1 {
 				// Resize it.
