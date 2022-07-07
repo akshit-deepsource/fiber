@@ -43,7 +43,7 @@ func (i Invoke) Command(name string, arg ...string) ([]byte, error) {
 	return i.CommandWithContext(ctx, name, arg...)
 }
 
-func (i Invoke) CommandWithContext(ctx context.Context, name string, arg ...string) ([]byte, error) {
+func (Invoke) CommandWithContext(ctx context.Context, name string, arg ...string) ([]byte, error) {
 	cmd := exec.CommandContext(ctx, name, arg...)
 
 	var buf bytes.Buffer

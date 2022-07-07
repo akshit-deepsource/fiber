@@ -80,7 +80,7 @@ func Test_Middleware_Favicon_Found(t *testing.T) {
 // TODO use os.Dir if fiber upgrades to 1.16
 type mockFS struct{}
 
-func (m mockFS) Open(name string) (http.File, error) {
+func (mockFS) Open(name string) (http.File, error) {
 	if name == "/" {
 		name = "."
 	} else {

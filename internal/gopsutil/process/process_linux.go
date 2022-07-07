@@ -274,7 +274,7 @@ func (p *Process) IOnice() (int32, error) {
 	return p.IOniceWithContext(context.Background())
 }
 
-func (p *Process) IOniceWithContext(_ context.Context) (int32, error) {
+func (*Process) IOniceWithContext(_ context.Context) (int32, error) {
 	return 0, common.ErrNotImplementedError
 }
 
@@ -438,7 +438,7 @@ func (p *Process) CPUAffinity() ([]int32, error) {
 	return p.CPUAffinityWithContext(context.Background())
 }
 
-func (p *Process) CPUAffinityWithContext(_ context.Context) ([]int32, error) {
+func (*Process) CPUAffinityWithContext(_ context.Context) ([]int32, error) {
 	return nil, common.ErrNotImplementedError
 }
 

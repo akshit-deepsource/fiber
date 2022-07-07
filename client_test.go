@@ -567,23 +567,23 @@ type readErrorConn struct {
 	net.Conn
 }
 
-func (r *readErrorConn) Read(_ []byte) (int, error) {
+func (*readErrorConn) Read(_ []byte) (int, error) {
 	return 0, fmt.Errorf("error")
 }
 
-func (r *readErrorConn) Write(p []byte) (int, error) {
+func (*readErrorConn) Write(p []byte) (int, error) {
 	return len(p), nil
 }
 
-func (r *readErrorConn) Close() error {
+func (*readErrorConn) Close() error {
 	return nil
 }
 
-func (r *readErrorConn) LocalAddr() net.Addr {
+func (*readErrorConn) LocalAddr() net.Addr {
 	return nil
 }
 
-func (r *readErrorConn) RemoteAddr() net.Addr {
+func (*readErrorConn) RemoteAddr() net.Addr {
 	return nil
 }
 func Test_Client_Agent_RetryIf(t *testing.T) {
@@ -1161,8 +1161,8 @@ type errorMultipartWriter struct {
 	count int
 }
 
-func (e *errorMultipartWriter) Boundary() string           { return "myBoundary" }
-func (e *errorMultipartWriter) SetBoundary(_ string) error { return nil }
+func (*errorMultipartWriter) Boundary() string           { return "myBoundary" }
+func (*errorMultipartWriter) SetBoundary(_ string) error { return nil }
 func (e *errorMultipartWriter) CreateFormFile(_, _ string) (io.Writer, error) {
 	if e.count == 0 {
 		e.count++
@@ -1170,8 +1170,8 @@ func (e *errorMultipartWriter) CreateFormFile(_, _ string) (io.Writer, error) {
 	}
 	return errorWriter{}, nil
 }
-func (e *errorMultipartWriter) WriteField(_, _ string) error { return errors.New("WriteField error") }
-func (e *errorMultipartWriter) Close() error                 { return errors.New("Close error") }
+func (*errorMultipartWriter) WriteField(_, _ string) error { return errors.New("WriteField error") }
+func (*errorMultipartWriter) Close() error                 { return errors.New("Close error") }
 
 type errorWriter struct{}
 

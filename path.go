@@ -159,7 +159,7 @@ func findNextParamPosition(pattern string) int {
 }
 
 // analyseConstantPart find the end of the constant part and create the route segment
-func (routeParser *routeParser) analyseConstantPart(pattern string, nextParamPosition int) (string, *routeSegment) {
+func (*routeParser) analyseConstantPart(pattern string, nextParamPosition int) (string, *routeSegment) {
 	// handle the constant part
 	processedPart := pattern
 	if nextParamPosition != -1 {

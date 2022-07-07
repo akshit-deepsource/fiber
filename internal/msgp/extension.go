@@ -60,7 +60,7 @@ func (e ExtensionTypeError) Error() string {
 }
 
 // Resumable returns 'true' for ExtensionTypeErrors
-func (e ExtensionTypeError) Resumable() bool { return true }
+func (ExtensionTypeError) Resumable() bool { return true }
 
 func errExt(got int8, wanted int8) error {
 	return ExtensionTypeError{Got: got, Want: wanted}

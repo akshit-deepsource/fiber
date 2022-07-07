@@ -84,7 +84,7 @@ func Require(old []byte, extra int) []byte {
 // nowhere writer
 type nwhere struct{}
 
-func (n nwhere) Write(p []byte) (int, error) { return len(p), nil }
+func (nwhere) Write(p []byte) (int, error) { return len(p), nil }
 
 // Marshaler is the interface implemented
 // by types that know how to marshal themselves
