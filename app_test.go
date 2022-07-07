@@ -595,7 +595,7 @@ func Test_App_Route_Naming(t *testing.T) {
 	utils.AssertEqual(t, "test", app.GetRoute("test").Name)
 }
 
-func Test_App_New(t *testing.T) {
+func Test_App_New(_ *testing.T) {
 	app := New()
 	app.Get("/", testEmptyHandler)
 
@@ -1711,7 +1711,7 @@ func Test_App_UseMountedErrorHandlerForBestPrefixMatch(t *testing.T) {
 	utils.AssertEqual(t, "hi, i'm a custom sub sub fiber error", string(b), "Third fiber Response body")
 }
 
-func emptyHandler(c *Ctx) error {
+func emptyHandler(_ *Ctx) error {
 	return nil
 }
 func Test_App_print_Route(t *testing.T) {

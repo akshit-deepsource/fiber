@@ -72,7 +72,7 @@ func getTerminalMap() (map[uint64]string, error) {
 	return ret, nil
 }
 
-func PidExistsWithContext(ctx context.Context, pid int32) (bool, error) {
+func PidExistsWithContext(_ context.Context, pid int32) (bool, error) {
 	if pid <= 0 {
 		return false, fmt.Errorf("invalid pid %v", pid)
 	}
@@ -121,7 +121,7 @@ func (p *Process) SendSignal(sig syscall.Signal) error {
 	return p.SendSignalWithContext(context.Background(), sig)
 }
 
-func (p *Process) SendSignalWithContext(ctx context.Context, sig syscall.Signal) error {
+func (p *Process) SendSignalWithContext(_ context.Context, sig syscall.Signal) error {
 	process, err := os.FindProcess(int(p.Pid))
 	if err != nil {
 		return err
@@ -140,7 +140,7 @@ func (p *Process) Suspend() error {
 	return p.SuspendWithContext(context.Background())
 }
 
-func (p *Process) SuspendWithContext(ctx context.Context) error {
+func (p *Process) SuspendWithContext(_ context.Context) error {
 	return p.SendSignal(unix.SIGSTOP)
 }
 
@@ -149,7 +149,7 @@ func (p *Process) Resume() error {
 	return p.ResumeWithContext(context.Background())
 }
 
-func (p *Process) ResumeWithContext(ctx context.Context) error {
+func (p *Process) ResumeWithContext(_ context.Context) error {
 	return p.SendSignal(unix.SIGCONT)
 }
 
@@ -158,7 +158,7 @@ func (p *Process) Terminate() error {
 	return p.TerminateWithContext(context.Background())
 }
 
-func (p *Process) TerminateWithContext(ctx context.Context) error {
+func (p *Process) TerminateWithContext(_ context.Context) error {
 	return p.SendSignal(unix.SIGTERM)
 }
 
@@ -167,7 +167,7 @@ func (p *Process) Kill() error {
 	return p.KillWithContext(context.Background())
 }
 
-func (p *Process) KillWithContext(ctx context.Context) error {
+func (p *Process) KillWithContext(_ context.Context) error {
 	return p.SendSignal(unix.SIGKILL)
 }
 
@@ -176,7 +176,7 @@ func (p *Process) Username() (string, error) {
 	return p.UsernameWithContext(context.Background())
 }
 
-func (p *Process) UsernameWithContext(ctx context.Context) (string, error) {
+func (p *Process) UsernameWithContext(_ context.Context) (string, error) {
 	uids, err := p.Uids()
 	if err != nil {
 		return "", err

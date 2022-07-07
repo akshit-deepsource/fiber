@@ -186,7 +186,7 @@ func (p *Process) Foreground() (bool, error) {
 	return p.ForegroundWithContext(context.Background())
 }
 
-func (p *Process) ForegroundWithContext(ctx context.Context) (bool, error) {
+func (p *Process) ForegroundWithContext(_ context.Context) (bool, error) {
 	// see https://github.com/shirou/gopsutil/issues/596#issuecomment-432707831 for implementation details
 	pid := p.Pid
 	statPath := common.HostProc(strconv.Itoa(int(pid)), "stat")
@@ -274,7 +274,7 @@ func (p *Process) IOnice() (int32, error) {
 	return p.IOniceWithContext(context.Background())
 }
 
-func (p *Process) IOniceWithContext(ctx context.Context) (int32, error) {
+func (p *Process) IOniceWithContext(_ context.Context) (int32, error) {
 	return 0, common.ErrNotImplementedError
 }
 
@@ -283,7 +283,7 @@ func (p *Process) Rlimit() ([]RlimitStat, error) {
 	return p.RlimitWithContext(context.Background())
 }
 
-func (p *Process) RlimitWithContext(ctx context.Context) ([]RlimitStat, error) {
+func (p *Process) RlimitWithContext(_ context.Context) ([]RlimitStat, error) {
 	return p.RlimitUsage(false)
 }
 
@@ -438,7 +438,7 @@ func (p *Process) CPUAffinity() ([]int32, error) {
 	return p.CPUAffinityWithContext(context.Background())
 }
 
-func (p *Process) CPUAffinityWithContext(ctx context.Context) ([]int32, error) {
+func (p *Process) CPUAffinityWithContext(_ context.Context) ([]int32, error) {
 	return nil, common.ErrNotImplementedError
 }
 
@@ -531,7 +531,7 @@ func (p *Process) Connections() ([]net.ConnectionStat, error) {
 	return p.ConnectionsWithContext(context.Background())
 }
 
-func (p *Process) ConnectionsWithContext(ctx context.Context) ([]net.ConnectionStat, error) {
+func (p *Process) ConnectionsWithContext(_ context.Context) ([]net.ConnectionStat, error) {
 	return net.ConnectionsPid("all", p.Pid)
 }
 
@@ -540,7 +540,7 @@ func (p *Process) ConnectionsMax(max int) ([]net.ConnectionStat, error) {
 	return p.ConnectionsMaxWithContext(context.Background(), max)
 }
 
-func (p *Process) ConnectionsMaxWithContext(ctx context.Context, max int) ([]net.ConnectionStat, error) {
+func (p *Process) ConnectionsMaxWithContext(_ context.Context, max int) ([]net.ConnectionStat, error) {
 	return net.ConnectionsPidMax("all", p.Pid, max)
 }
 
@@ -549,7 +549,7 @@ func (p *Process) NetIOCounters(pernic bool) ([]net.IOCountersStat, error) {
 	return p.NetIOCountersWithContext(context.Background(), pernic)
 }
 
-func (p *Process) NetIOCountersWithContext(ctx context.Context, pernic bool) ([]net.IOCountersStat, error) {
+func (p *Process) NetIOCountersWithContext(_ context.Context, pernic bool) ([]net.IOCountersStat, error) {
 	filename := common.HostProc(strconv.Itoa(int(p.Pid)), "net/dev")
 	return net.IOCountersByFile(pernic, filename)
 }
@@ -559,7 +559,7 @@ func (p *Process) MemoryMaps(grouped bool) (*[]MemoryMapsStat, error) {
 	return p.MemoryMapsWithContext(context.Background(), grouped)
 }
 
-func (p *Process) MemoryMapsWithContext(ctx context.Context, grouped bool) (*[]MemoryMapsStat, error) {
+func (p *Process) MemoryMapsWithContext(_ context.Context, grouped bool) (*[]MemoryMapsStat, error) {
 	pid := p.Pid
 	var ret []MemoryMapsStat
 	if grouped {
@@ -670,7 +670,7 @@ func limitToInt(val string) (int32, error) {
 }
 
 // Get num_fds from /proc/(pid)/limits
-func (p *Process) fillFromLimitsWithContext(ctx context.Context) ([]RlimitStat, error) {
+func (p *Process) fillFromLimitsWithContext(_ context.Context) ([]RlimitStat, error) {
 	pid := p.Pid
 	limitsFile := common.HostProc(strconv.Itoa(int(pid)), "limits")
 	d, err := os.Open(limitsFile)
@@ -763,7 +763,7 @@ func (p *Process) fillFromLimitsWithContext(ctx context.Context) ([]RlimitStat, 
 }
 
 // Get list of /proc/(pid)/fd files
-func (p *Process) fillFromfdListWithContext(ctx context.Context) (string, []string, error) {
+func (p *Process) fillFromfdListWithContext(_ context.Context) (string, []string, error) {
 	pid := p.Pid
 	statPath := common.HostProc(strconv.Itoa(int(pid)), "fd")
 	d, err := os.Open(statPath)
@@ -805,7 +805,7 @@ func (p *Process) fillFromfdWithContext(ctx context.Context) (int32, []*OpenFile
 }
 
 // Get cwd from /proc/(pid)/cwd
-func (p *Process) fillFromCwdWithContext(ctx context.Context) (string, error) {
+func (p *Process) fillFromCwdWithContext(_ context.Context) (string, error) {
 	pid := p.Pid
 	cwdPath := common.HostProc(strconv.Itoa(int(pid)), "cwd")
 	cwd, err := os.Readlink(cwdPath)
@@ -816,7 +816,7 @@ func (p *Process) fillFromCwdWithContext(ctx context.Context) (string, error) {
 }
 
 // Get exe from /proc/(pid)/exe
-func (p *Process) fillFromExeWithContext(ctx context.Context) (string, error) {
+func (p *Process) fillFromExeWithContext(_ context.Context) (string, error) {
 	pid := p.Pid
 	exePath := common.HostProc(strconv.Itoa(int(pid)), "exe")
 	exe, err := os.Readlink(exePath)
@@ -827,7 +827,7 @@ func (p *Process) fillFromExeWithContext(ctx context.Context) (string, error) {
 }
 
 // Get cmdline from /proc/(pid)/cmdline
-func (p *Process) fillFromCmdlineWithContext(ctx context.Context) (string, error) {
+func (p *Process) fillFromCmdlineWithContext(_ context.Context) (string, error) {
 	pid := p.Pid
 	cmdPath := common.HostProc(strconv.Itoa(int(pid)), "cmdline")
 	cmdline, err := ioutil.ReadFile(cmdPath)
@@ -844,7 +844,7 @@ func (p *Process) fillFromCmdlineWithContext(ctx context.Context) (string, error
 	return strings.Join(ret, " "), nil
 }
 
-func (p *Process) fillSliceFromCmdlineWithContext(ctx context.Context) ([]string, error) {
+func (p *Process) fillSliceFromCmdlineWithContext(_ context.Context) ([]string, error) {
 	pid := p.Pid
 	cmdPath := common.HostProc(strconv.Itoa(int(pid)), "cmdline")
 	cmdline, err := ioutil.ReadFile(cmdPath)
@@ -867,7 +867,7 @@ func (p *Process) fillSliceFromCmdlineWithContext(ctx context.Context) ([]string
 }
 
 // Get IO status from /proc/(pid)/io
-func (p *Process) fillFromIOWithContext(ctx context.Context) (*IOCountersStat, error) {
+func (p *Process) fillFromIOWithContext(_ context.Context) (*IOCountersStat, error) {
 	pid := p.Pid
 	ioPath := common.HostProc(strconv.Itoa(int(pid)), "io")
 	ioline, err := ioutil.ReadFile(ioPath)
@@ -906,7 +906,7 @@ func (p *Process) fillFromIOWithContext(ctx context.Context) (*IOCountersStat, e
 }
 
 // Get memory info from /proc/(pid)/statm
-func (p *Process) fillFromStatmWithContext(ctx context.Context) (*MemoryInfoStat, *MemoryInfoExStat, error) {
+func (p *Process) fillFromStatmWithContext(_ context.Context) (*MemoryInfoStat, *MemoryInfoExStat, error) {
 	pid := p.Pid
 	memPath := common.HostProc(strconv.Itoa(int(pid)), "statm")
 	contents, err := ioutil.ReadFile(memPath)
@@ -958,7 +958,7 @@ func (p *Process) fillFromStatmWithContext(ctx context.Context) (*MemoryInfoStat
 }
 
 // Get various status from /proc/(pid)/status
-func (p *Process) fillFromStatusWithContext(ctx context.Context) error {
+func (p *Process) fillFromStatusWithContext(_ context.Context) error {
 	pid := p.Pid
 	statPath := common.HostProc(strconv.Itoa(int(pid)), "status")
 	contents, err := ioutil.ReadFile(statPath)
@@ -1246,7 +1246,7 @@ func (p *Process) fillFromStatWithContext(ctx context.Context) (uint64, int32, *
 	return p.fillFromTIDStatWithContext(ctx, -1)
 }
 
-func pidsWithContext(ctx context.Context) ([]int32, error) {
+func pidsWithContext(_ context.Context) ([]int32, error) {
 	return readPidsFromDir(common.HostProc())
 }
 

@@ -8,7 +8,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func defaultStackTraceHandler(c *fiber.Ctx, e interface{}) {
+func defaultStackTraceHandler(_ *fiber.Ctx, e interface{}) {
 	buf := make([]byte, defaultStackTraceBufLen)
 	buf = buf[:runtime.Stack(buf, false)]
 	_, _ = os.Stderr.WriteString(fmt.Sprintf("panic: %v\n%s\n", e, buf))

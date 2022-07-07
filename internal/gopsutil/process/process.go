@@ -275,7 +275,7 @@ func (p *Process) MemoryPercent() (float32, error) {
 	return p.MemoryPercentWithContext(context.Background())
 }
 
-func (p *Process) MemoryPercentWithContext(ctx context.Context) (float32, error) {
+func (p *Process) MemoryPercentWithContext(_ context.Context) (float32, error) {
 	machineMemory, err := mem.VirtualMemory()
 	if err != nil {
 		return 0, err
@@ -296,7 +296,7 @@ func (p *Process) CPUPercent() (float64, error) {
 	return p.CPUPercentWithContext(context.Background())
 }
 
-func (p *Process) CPUPercentWithContext(ctx context.Context) (float64, error) {
+func (p *Process) CPUPercentWithContext(_ context.Context) (float64, error) {
 	crt_time, err := p.CreateTime()
 	if err != nil {
 		return 0, err
