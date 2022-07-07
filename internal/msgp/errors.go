@@ -129,8 +129,8 @@ func (e errWrapped) Unwrap() error { return e.cause }
 
 type errShort struct{}
 
-func (e errShort) Error() string   { return "msgp: too few bytes left to read object" }
-func (e errShort) Resumable() bool { return false }
+func (errShort) Error() string   { return "msgp: too few bytes left to read object" }
+func (errShort) Resumable() bool { return false }
 
 type errFatal struct {
 	ctx string
@@ -144,7 +144,7 @@ func (f errFatal) Error() string {
 	return out
 }
 
-func (f errFatal) Resumable() bool { return false }
+func (errFatal) Resumable() bool { return false }
 
 func (f errFatal) withContext(ctx string) error { f.ctx = addCtx(f.ctx, ctx); return f }
 
@@ -167,7 +167,7 @@ func (a ArrayError) Error() string {
 }
 
 // Resumable is always 'true' for ArrayErrors
-func (a ArrayError) Resumable() bool { return true }
+func (ArrayError) Resumable() bool { return true }
 
 func (a ArrayError) withContext(ctx string) error { a.ctx = addCtx(a.ctx, ctx); return a }
 
@@ -190,7 +190,7 @@ func (i IntOverflow) Error() string {
 }
 
 // Resumable is always 'true' for overflows
-func (i IntOverflow) Resumable() bool { return true }
+func (IntOverflow) Resumable() bool { return true }
 
 func (i IntOverflow) withContext(ctx string) error { i.ctx = addCtx(i.ctx, ctx); return i }
 
@@ -213,7 +213,7 @@ func (u UintOverflow) Error() string {
 }
 
 // Resumable is always 'true' for overflows
-func (u UintOverflow) Resumable() bool { return true }
+func (UintOverflow) Resumable() bool { return true }
 
 func (u UintOverflow) withContext(ctx string) error { u.ctx = addCtx(u.ctx, ctx); return u }
 
@@ -235,7 +235,7 @@ func (u UintBelowZero) Error() string {
 }
 
 // Resumable is always 'true' for overflows
-func (u UintBelowZero) Resumable() bool { return true }
+func (UintBelowZero) Resumable() bool { return true }
 
 func (u UintBelowZero) withContext(ctx string) error {
 	u.ctx = ctx
@@ -262,7 +262,7 @@ func (t TypeError) Error() string {
 }
 
 // Resumable returns 'true' for TypeErrors
-func (t TypeError) Resumable() bool { return true }
+func (TypeError) Resumable() bool { return true }
 
 func (t TypeError) withContext(ctx string) error { t.ctx = addCtx(t.ctx, ctx); return t }
 
@@ -288,7 +288,7 @@ func (i InvalidPrefixError) Error() string {
 }
 
 // Resumable returns 'false' for InvalidPrefixErrors
-func (i InvalidPrefixError) Resumable() bool { return false }
+func (InvalidPrefixError) Resumable() bool { return false }
 
 // ErrUnsupportedType is returned
 // when a bad argument is supplied
@@ -309,7 +309,7 @@ func (e *ErrUnsupportedType) Error() string {
 }
 
 // Resumable returns 'true' for ErrUnsupportedType
-func (e *ErrUnsupportedType) Resumable() bool { return true }
+func (*ErrUnsupportedType) Resumable() bool { return true }
 
 func (e *ErrUnsupportedType) withContext(ctx string) error {
 	o := *e

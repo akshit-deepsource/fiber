@@ -1025,7 +1025,7 @@ func (app *App) Test(req *http.Request, msTimeout ...int) (resp *http.Response, 
 
 type disableLogger struct{}
 
-func (dl *disableLogger) Printf(_ string, _ ...interface{}) {
+func (*disableLogger) Printf(_ string, _ ...interface{}) {
 	// fmt.Println(fmt.Sprintf(format, args...))
 }
 

@@ -3,6 +3,6 @@
 
 package ole
 
-func (v *ITypeInfo) GetTypeAttr() (*TYPEATTR, error) {
+func (*ITypeInfo) GetTypeAttr() (*TYPEATTR, error) {
 	return nil, NewError(E_NOTIMPL)
 }

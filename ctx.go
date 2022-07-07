@@ -1017,7 +1017,7 @@ func (c *Ctx) ReqHeaderParser(out interface{}) error {
 	return c.parseToStruct(reqHeaderTag, out, data)
 }
 
-func (c *Ctx) parseToStruct(aliasTag string, out interface{}, data map[string][]string) error {
+func (*Ctx) parseToStruct(aliasTag string, out interface{}, data map[string][]string) error {
 	// Get decoder from pool
 	schemaDecoder := decoderPool.Get().(*schema.Decoder)
 	defer decoderPool.Put(schemaDecoder)
@@ -1151,7 +1151,7 @@ func (c *Ctx) Bind(vars Map) error {
 }
 
 // getLocationFromRoute get URL location from route using parameters
-func (c *Ctx) getLocationFromRoute(route Route, params Map) (string, error) {
+func (*Ctx) getLocationFromRoute(route Route, params Map) (string, error) {
 	buf := bytebufferpool.Get()
 	for _, segment := range route.routeParser.segs {
 		for key, val := range params {
@@ -1315,12 +1315,12 @@ func (c *Ctx) Route() *Route {
 }
 
 // SaveFile saves any multipart file to disk.
-func (c *Ctx) SaveFile(fileheader *multipart.FileHeader, path string) error {
+func (*Ctx) SaveFile(fileheader *multipart.FileHeader, path string) error {
 	return fasthttp.SaveMultipartFile(fileheader, path)
 }
 
 // SaveFileToStorage saves any multipart file to an external storage system.
-func (c *Ctx) SaveFileToStorage(fileheader *multipart.FileHeader, path string, storage Storage) error {
+func (*Ctx) SaveFileToStorage(fileheader *multipart.FileHeader, path string, storage Storage) error {
 	file, err := fileheader.Open()
 	if err != nil {
 		return err
@@ -1600,7 +1600,7 @@ func (c *Ctx) IsProxyTrusted() bool {
 }
 
 // IsLocalHost will return true if address is a localhost address.
-func (c *Ctx) isLocalHost(address string) bool {
+func (*Ctx) isLocalHost(address string) bool {
 	localHosts := []string{"127.0.0.1", "0.0.0.0", "::1"}
 	for _, h := range localHosts {
 		if strings.Contains(address, h) {

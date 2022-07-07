@@ -3,14 +3,14 @@
 
 package ole
 
-func (v *IInspectable) GetIids() ([]*GUID, error) {
+func (*IInspectable) GetIids() ([]*GUID, error) {
 	return []*GUID{}, NewError(E_NOTIMPL)
 }
 
-func (v *IInspectable) GetRuntimeClassName() (string, error) {
+func (*IInspectable) GetRuntimeClassName() (string, error) {
 	return "", NewError(E_NOTIMPL)
 }
 
-func (v *IInspectable) GetTrustLevel() (uint32, error) {
+func (*IInspectable) GetTrustLevel() (uint32, error) {
 	return uint32(0), NewError(E_NOTIMPL)
 }

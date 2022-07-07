@@ -32,6 +32,6 @@ func DeleteHString(_ HString) (err error) {
 }
 
 // String returns Go string value of HString.
-func (h HString) String() string {
+func (HString) String() string {
 	return ""
 }

@@ -192,7 +192,7 @@ func (app *App) addPrefixToRoute(prefix string, route *Route) *Route {
 	return route
 }
 
-func (app *App) copyRoute(route *Route) *Route {
+func (*App) copyRoute(route *Route) *Route {
 	return &Route{
 		// Router booleans
 		use:  route.use,

@@ -31,7 +31,7 @@ func New(config ...Config) *Store {
 
 // RegisterType will allow you to encode/decode custom types
 // into any Storage provider
-func (s *Store) RegisterType(i interface{}) {
+func (*Store) RegisterType(i interface{}) {
 	gob.Register(i)
 }
 
