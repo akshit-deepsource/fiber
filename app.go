@@ -812,7 +812,7 @@ func (app *App) Listen(addr string) error {
 //  app.ListenTLS(":8080", "./cert.pem", "./cert.key")
 func (app *App) ListenTLS(addr, certFile, keyFile string) error {
 	// Check for valid cert/key path
-	if len(certFile) == 0 || len(keyFile) == 0 {
+	if certFile == "" || keyFile == "" {
 		return errors.New("tls: provide a valid cert or key path")
 	}
 	// Prefork is supported
@@ -853,7 +853,7 @@ func (app *App) ListenTLS(addr, certFile, keyFile string) error {
 //  app.ListenMutualTLS(":8080", "./cert.pem", "./cert.key", "./client.pem")
 func (app *App) ListenMutualTLS(addr, certFile, keyFile, clientCertFile string) error {
 	// Check for valid cert/key path
-	if len(certFile) == 0 || len(keyFile) == 0 {
+	if certFile == "" || keyFile == "" {
 		return errors.New("tls: provide a valid cert or key path")
 	}
 

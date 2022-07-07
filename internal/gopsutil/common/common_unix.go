@@ -33,7 +33,7 @@ func CallLsofWithContext(ctx context.Context, invoke Invoker, pid int32, args ..
 
 	var ret []string
 	for _, l := range lines[1:] {
-		if len(l) == 0 {
+		if l == "" {
 			continue
 		}
 		ret = append(ret, l)
@@ -55,7 +55,7 @@ func CallPgrepWithContext(ctx context.Context, invoke Invoker, pid int32) ([]int
 	lines := strings.Split(string(out), "\n")
 	ret := make([]int32, 0, len(lines))
 	for _, l := range lines {
-		if len(l) == 0 {
+		if l == "" {
 			continue
 		}
 		i, err := strconv.Atoi(l)

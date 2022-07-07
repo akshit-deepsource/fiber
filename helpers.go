@@ -167,7 +167,7 @@ func uniqueRouteStack(stack []*Route) []*Route {
 
 // defaultString returns the value or a default value if it is set
 func defaultString(value string, defaultValue []string) string {
-	if len(value) == 0 && len(defaultValue) > 0 {
+	if value == "" && len(defaultValue) > 0 {
 		return defaultValue[0]
 	}
 	return value
@@ -222,7 +222,7 @@ func setETag(c *Ctx, weak bool) {
 }
 
 func getGroupPath(prefix, path string) string {
-	if len(path) == 0 || path == "/" {
+	if path == "" || path == "/" {
 		return prefix
 	}
 
