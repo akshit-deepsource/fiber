@@ -196,7 +196,7 @@ func Interfaces() ([]InterfaceStat, error) {
 	return InterfacesWithContext(context.Background())
 }
 
-func InterfacesWithContext(ctx context.Context) ([]InterfaceStat, error) {
+func InterfacesWithContext(_ context.Context) ([]InterfaceStat, error) {
 	is, err := net.Interfaces()
 	if err != nil {
 		return nil, err

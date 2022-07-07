@@ -52,7 +52,7 @@ func VirtualMemoryExWithContext(ctx context.Context) (*VirtualMemoryExStat, erro
 	return vmEx, nil
 }
 
-func fillFromMeminfoWithContext(ctx context.Context) (*VirtualMemoryStat, *VirtualMemoryExStat, error) {
+func fillFromMeminfoWithContext(_ context.Context) (*VirtualMemoryStat, *VirtualMemoryExStat, error) {
 	filename := common.HostProc("meminfo")
 	lines, _ := common.ReadLines(filename)
 
@@ -178,7 +178,7 @@ func SwapMemory() (*SwapMemoryStat, error) {
 	return SwapMemoryWithContext(context.Background())
 }
 
-func SwapMemoryWithContext(ctx context.Context) (*SwapMemoryStat, error) {
+func SwapMemoryWithContext(_ context.Context) (*SwapMemoryStat, error) {
 	sysinfo := &unix.Sysinfo_t{}
 
 	if err := unix.Sysinfo(sysinfo); err != nil {

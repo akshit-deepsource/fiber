@@ -4,6 +4,6 @@
 package ole
 
 // errstr converts error code to string.
-func errstr(errno int) string {
+func errstr(_ int) string {
 	return ""
 }

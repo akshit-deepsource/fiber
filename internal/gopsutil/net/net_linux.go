@@ -58,7 +58,7 @@ func IOCountersByFile(pernic bool, filename string) ([]IOCountersStat, error) {
 	return IOCountersByFileWithContext(context.Background(), pernic, filename)
 }
 
-func IOCountersByFileWithContext(ctx context.Context, pernic bool, filename string) ([]IOCountersStat, error) {
+func IOCountersByFileWithContext(_ context.Context, pernic bool, filename string) ([]IOCountersStat, error) {
 	lines, err := common.ReadLines(filename)
 	if err != nil {
 		return nil, err
@@ -166,7 +166,7 @@ func ProtoCounters(protocols []string) ([]ProtoCountersStat, error) {
 	return ProtoCountersWithContext(context.Background(), protocols)
 }
 
-func ProtoCountersWithContext(ctx context.Context, protocols []string) ([]ProtoCountersStat, error) {
+func ProtoCountersWithContext(_ context.Context, protocols []string) ([]ProtoCountersStat, error) {
 	if len(protocols) == 0 {
 		protocols = netProtocols
 	}
@@ -229,7 +229,7 @@ func FilterCounters() ([]FilterStat, error) {
 	return FilterCountersWithContext(context.Background())
 }
 
-func FilterCountersWithContext(ctx context.Context) ([]FilterStat, error) {
+func FilterCountersWithContext(_ context.Context) ([]FilterStat, error) {
 	countfile := common.HostProc("sys/net/netfilter/nf_conntrack_count")
 	maxfile := common.HostProc("sys/net/netfilter/nf_conntrack_max")
 
@@ -260,7 +260,7 @@ func ConntrackStats(percpu bool) ([]ConntrackStat, error) {
 }
 
 // ConntrackStatsWithContext returns more detailed info about the conntrack table
-func ConntrackStatsWithContext(ctx context.Context, percpu bool) ([]ConntrackStat, error) {
+func ConntrackStatsWithContext(_ context.Context, percpu bool) ([]ConntrackStat, error) {
 	return conntrackStatsFromFile(common.HostProc("net/stat/nf_conntrack"), percpu)
 }
 
@@ -388,7 +388,7 @@ func Connections(kind string) ([]ConnectionStat, error) {
 	return ConnectionsWithContext(context.Background(), kind)
 }
 
-func ConnectionsWithContext(ctx context.Context, kind string) ([]ConnectionStat, error) {
+func ConnectionsWithContext(_ context.Context, kind string) ([]ConnectionStat, error) {
 	return ConnectionsPid(kind, 0)
 }
 
@@ -398,7 +398,7 @@ func ConnectionsMax(kind string, max int) ([]ConnectionStat, error) {
 	return ConnectionsMaxWithContext(context.Background(), kind, max)
 }
 
-func ConnectionsMaxWithContext(ctx context.Context, kind string, max int) ([]ConnectionStat, error) {
+func ConnectionsMaxWithContext(_ context.Context, kind string, max int) ([]ConnectionStat, error) {
 	return ConnectionsPidMax(kind, 0, max)
 }
 
@@ -451,7 +451,7 @@ func ConnectionsPidMaxWithoutUidsWithContext(ctx context.Context, kind string, p
 	return connectionsPidMaxWithoutUidsWithContext(ctx, kind, pid, max, true)
 }
 
-func connectionsPidMaxWithoutUidsWithContext(ctx context.Context, kind string, pid int32, max int, skipUids bool) ([]ConnectionStat, error) {
+func connectionsPidMaxWithoutUidsWithContext(_ context.Context, kind string, pid int32, max int, skipUids bool) ([]ConnectionStat, error) {
 	tmap, ok := netConnectionKindMap[kind]
 	if !ok {
 		return nil, fmt.Errorf("invalid kind, %s", kind)
@@ -589,7 +589,7 @@ func Pids() ([]int32, error) {
 	return PidsWithContext(context.Background())
 }
 
-func PidsWithContext(ctx context.Context) ([]int32, error) {
+func PidsWithContext(_ context.Context) ([]int32, error) {
 	var ret []int32
 
 	d, err := os.Open(common.HostProc())
@@ -726,7 +726,7 @@ func Reverse(s []byte) []byte {
 	return ReverseWithContext(context.Background(), s)
 }
 
-func ReverseWithContext(ctx context.Context, s []byte) []byte {
+func ReverseWithContext(_ context.Context, s []byte) []byte {
 	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
 		s[i], s[j] = s[j], s[i]
 	}

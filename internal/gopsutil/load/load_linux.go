@@ -25,7 +25,7 @@ func AvgWithContext(ctx context.Context) (*AvgStat, error) {
 	return stat, err
 }
 
-func sysinfoAvgWithContext(ctx context.Context) (*AvgStat, error) {
+func sysinfoAvgWithContext(_ context.Context) (*AvgStat, error) {
 	var info syscall.Sysinfo_t
 	err := syscall.Sysinfo(&info)
 	if err != nil {
@@ -40,7 +40,7 @@ func sysinfoAvgWithContext(ctx context.Context) (*AvgStat, error) {
 	}, nil
 }
 
-func fileAvgWithContext(ctx context.Context) (*AvgStat, error) {
+func fileAvgWithContext(_ context.Context) (*AvgStat, error) {
 	values, err := readLoadAvgFromFile()
 	if err != nil {
 		return nil, err
@@ -74,7 +74,7 @@ func Misc() (*MiscStat, error) {
 	return MiscWithContext(context.Background())
 }
 
-func MiscWithContext(ctx context.Context) (*MiscStat, error) {
+func MiscWithContext(_ context.Context) (*MiscStat, error) {
 	filename := common.HostProc("stat")
 	out, err := ioutil.ReadFile(filename)
 	if err != nil {

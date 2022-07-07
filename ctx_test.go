@@ -2843,7 +2843,7 @@ func Test_Ctx_Get_Location_From_Route_name_Optional_greedy_one_param(t *testing.
 
 type errorTemplateEngine struct{}
 
-func (t errorTemplateEngine) Render(w io.Writer, name string, bind interface{}, layout ...string) error {
+func (t errorTemplateEngine) Render(_ io.Writer, _ string, _ interface{}, _ ...string) error {
 	return errors.New("errorTemplateEngine")
 }
 

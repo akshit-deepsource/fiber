@@ -567,7 +567,7 @@ type readErrorConn struct {
 	net.Conn
 }
 
-func (r *readErrorConn) Read(p []byte) (int, error) {
+func (r *readErrorConn) Read(_ []byte) (int, error) {
 	return 0, fmt.Errorf("error")
 }
 

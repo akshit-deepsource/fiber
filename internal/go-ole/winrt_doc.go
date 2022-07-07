@@ -4,17 +4,17 @@
 package ole
 
 // RoInitialize
-func RoInitialize(thread_type uint32) (err error) {
+func RoInitialize(_ uint32) (err error) {
 	return NewError(E_NOTIMPL)
 }
 
 // RoActivateInstance
-func RoActivateInstance(clsid string) (ins *IInspectable, err error) {
+func RoActivateInstance(_ string) (ins *IInspectable, err error) {
 	return nil, NewError(E_NOTIMPL)
 }
 
 // RoGetActivationFactory
-func RoGetActivationFactory(clsid string, iid *GUID) (ins *IInspectable, err error) {
+func RoGetActivationFactory(_ string, _ *GUID) (ins *IInspectable, err error) {
 	return nil, NewError(E_NOTIMPL)
 }
 
@@ -22,12 +22,12 @@ func RoGetActivationFactory(clsid string, iid *GUID) (ins *IInspectable, err err
 type HString uintptr
 
 // NewHString returns a new HString for Go string.
-func NewHString(s string) (hstring HString, err error) {
+func NewHString(_ string) (hstring HString, err error) {
 	return HString(uintptr(0)), NewError(E_NOTIMPL)
 }
 
 // DeleteHString deletes HString.
-func DeleteHString(hstring HString) (err error) {
+func DeleteHString(_ HString) (err error) {
 	return NewError(E_NOTIMPL)
 }
 

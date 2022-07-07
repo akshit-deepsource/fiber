@@ -3,10 +3,10 @@
 
 package ole
 
-func (v *IConnectionPointContainer) EnumConnectionPoints(points interface{}) error {
+func (v *IConnectionPointContainer) EnumConnectionPoints(_ interface{}) error {
 	return NewError(E_NOTIMPL)
 }
 
-func (v *IConnectionPointContainer) FindConnectionPoint(iid *GUID, point **IConnectionPoint) error {
+func (v *IConnectionPointContainer) FindConnectionPoint(_ *GUID, _ **IConnectionPoint) error {
 	return NewError(E_NOTIMPL)
 }
