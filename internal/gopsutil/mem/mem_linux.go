@@ -72,7 +72,7 @@ func fillFromMeminfoWithContext(_ context.Context) (*VirtualMemoryStat, *Virtual
 		}
 		key := strings.TrimSpace(fields[0])
 		value := strings.TrimSpace(fields[1])
-		value = strings.Replace(value, " kB", "", -1)
+		value = strings.ReplaceAll(value, " kB", "")
 
 		t, err := strconv.ParseUint(value, 10, 64)
 		if err != nil {
