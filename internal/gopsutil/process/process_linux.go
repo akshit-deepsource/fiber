@@ -490,7 +490,7 @@ func (p *Process) Children() ([]*Process, error) {
 func (p *Process) ChildrenWithContext(ctx context.Context) ([]*Process, error) {
 	pids, err := common.CallPgrepWithContext(ctx, invoke, p.Pid)
 	if err != nil {
-		if pids == nil || len(pids) == 0 {
+		if len(pids) == 0 {
 			return nil, ErrorNoChildren
 		}
 		return nil, err
