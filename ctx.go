@@ -170,7 +170,7 @@ func (c *Ctx) Accepts(offers ...string) string {
 
 		var mimetype string
 		for _, offer := range offers {
-			if len(offer) == 0 {
+			if offer == "" {
 				continue
 				// Accept: */*
 			} else if spec == "*/*" {
@@ -231,7 +231,7 @@ func (c *Ctx) Append(field string, values ...string) {
 	h := c.app.getString(c.fasthttp.Response.Header.Peek(field))
 	originalH := h
 	for _, value := range values {
-		if len(h) == 0 {
+		if h == "" {
 			h = value
 		} else if h != value && !strings.HasPrefix(h, value+",") && !strings.HasSuffix(h, " "+value) &&
 			!strings.Contains(h, " "+value+",") {
@@ -835,7 +835,7 @@ func (c *Ctx) Params(key string, defaultValue ...string) string {
 		}
 		if c.route.Params[i] == key {
 			// in case values are not here
-			if len(c.values) <= i || len(c.values[i]) == 0 {
+			if len(c.values) <= i || c.values[i] == "" {
 				break
 			}
 			return c.values[i]
@@ -1386,7 +1386,7 @@ func (c *Ctx) SendFile(file string, compress ...bool) error {
 		c.fasthttp.Request.Header.Del(HeaderAcceptEncoding)
 	}
 	// copy of https://github.com/valyala/fasthttp/blob/7cc6f4c513f9e0d3686142e0a1a5aa2f76b3194a/fs.go#L103-L121 with small adjustments
-	if len(file) == 0 || !filepath.IsAbs(file) {
+	if file == "" || !filepath.IsAbs(file) {
 		// extend relative path to absolute path
 		hasTrailingSlash := len(file) > 0 && (file[len(file)-1] == '/' || file[len(file)-1] == '\\')
 

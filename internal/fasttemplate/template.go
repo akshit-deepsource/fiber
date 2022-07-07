@@ -224,10 +224,10 @@ func (t *Template) Reset(template, startTag, endTag string) error {
 	t.texts = t.texts[:0]
 	t.tags = t.tags[:0]
 
-	if len(startTag) == 0 {
+	if startTag == "" {
 		panic("startTag cannot be empty")
 	}
-	if len(endTag) == 0 {
+	if endTag == "" {
 		panic("endTag cannot be empty")
 	}
 
